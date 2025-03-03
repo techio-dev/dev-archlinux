@@ -29,12 +29,12 @@ jobs:
       - name: Pre-build dev container go image
         uses: devcontainers/ci@v0.3
         with:
-          imageName: ghcr.io/techio-dev/dev-archlinux:go
+          imageName: ghcr.io/techio-dev/dev-archlinux/go
           push: always
           subFolder: go
       - name: Pre-build dev container nodejs image
         uses: devcontainers/ci@v0.3
         with:
-          imageName: ghcr.io/techio-dev/dev-archlinux:nodejs
+          imageName: ghcr.io/techio-dev/dev-archlinux/nodejs
           push: always
           subFolder: nodejs
