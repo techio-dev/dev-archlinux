@@ -4,37 +4,71 @@ on:
     branches:
       - main
 jobs:
-  docker-image:
+  build-base:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Login to GitHub Container Registry
-        uses: docker/login-action@v3
+      - name: Buildah Base Images
+        id: build-base
+        uses: redhat-actions/buildah-build@v2
         with:
-          registry: ghcr.io
-          username: ${{github.actor}}
+          image: dev-archlinux
+          tags: base
+          oci: true
+          containerfiles: |
+            base/Dockerfile
+      - name: Push Base To ghcr
+        id: push-base-to-docker
+        uses: redhat-actions/push-to-registry@v2
+        with:
+          image: ${{ steps.build-base.outputs.image }}
+          tags: ${{ steps.build-base.outputs.tags }}
+          registry: "ghcr.io/techio-dev"
+          username: "naicoi92"
           password: ${{ secrets.GH_TOKEN }}
-      - name: Pre-build dev container base image
-        uses: devcontainers/ci@v0.3
+  build-go:
+    needs: [build-base]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Buildah Go Images
+        id: build-go
+        uses: redhat-actions/buildah-build@v2
         with:
-          imageName: ghcr.io/techio-dev/dev-archlinux
-          imageTag: dev
-          push: always
-          subFolder: base
-          noCache: true
-      - name: Pre-build dev container go image
-        uses: devcontainers/ci@v0.3
+          image: dev-archlinux
+          tags: go
+          oci: true
+          containerfiles: |
+            go/Dockerfile
+      - name: Push Go To ghcr
+        id: push-go-to-docker
+        uses: redhat-actions/push-to-registry@v2
         with:
-          imageName: ghcr.io/techio-dev/dev-archlinux
-          imageTag: go
-          push: always
-          subFolder: go
-          noCache: true
-      - name: Pre-build dev container nodejs image
-        uses: devcontainers/ci@v0.3
+          image: ${{ steps.build-base.outputs.image }}
+          tags: ${{ steps.build-base.outputs.tags }}
+          registry: "ghcr.io/techio-dev"
+          username: "naicoi92"
+          password: ${{ secrets.GH_TOKEN }}
+  build-nodejs:
+    needs: [build-base]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Buildah NodeJS Images
+        id: build-nodejs
+        uses: redhat-actions/buildah-build@v2
         with:
-          imageName: ghcr.io/techio-dev/dev-archlinux
-          imageTag: nodejs
-          push: always
-          subFolder: nodejs
-          noCache: true
+          image: dev-archlinux
+          tags: nodejs
+          oci: true
+          containerfiles: |
+            nodejs/Dockerfile
+      - name: Push Nodejs To ghcr
+        id: push-nodejs-to-docker
+        uses: redhat-actions/push-to-registry@v2
+        with:
+          image: ${{ steps.build-base.outputs.image }}
+          tags: ${{ steps.build-base.outputs.tags }}
+          registry: "ghcr.io/techio-dev"
+          username: "naicoi92"
+          password: ${{ secrets.GH_TOKEN }}
