@@ -1,0 +1,6 @@
+{
+  "name": "Devcontainer ArchLinux Base",
+  "build": {
+    "dockerfile": "Dockerfile"
+  }
+}
