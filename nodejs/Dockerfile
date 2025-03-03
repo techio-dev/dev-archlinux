@@ -1,4 +1,4 @@
-FROM ghcr.io/techio-dev/dev-archlinux:base
+FROM ghcr.io/techio-dev/dev-archlinux:dev
 RUN pacman -S --noconfirm \
   nodejs-lts-jod \
   npm \
