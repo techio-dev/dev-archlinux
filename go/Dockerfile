@@ -1,5 +1,4 @@
 FROM ghcr.io/techio-dev/dev-archlinux:base
-USER dev
 RUN pacman -S --noconfirm \
   go \
   gopls \
@@ -8,8 +7,12 @@ RUN pacman -S --noconfirm \
   pgformatter \
   yaml-language-server \
   vscode-json-languageserver
-ENV PATH="/home/dev/go/bin:$PATH"
+RUN go install golang.org/x/tools/cmd/goimports@latest
+ENV PATH="/root/go/bin:$PATH"
+RUN echo "dev ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+USER dev
 RUN yay -S --noconfirm \
   golines
-RUN go install golang.org/x/tools/cmd/goimports@latest
+RUN echo "root ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+USER root
 WORKDIR /workspaces
