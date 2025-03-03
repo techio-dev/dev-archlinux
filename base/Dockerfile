@@ -12,4 +12,8 @@ RUN pacman -S --noconfirm \
   curl \
   lazygit \
   jq
+RUN git clone https://aur.archlinux.org/yay.git
+RUN cd yay
+RUN makepkg -si
+RUN yay -S mods
 WORKDIR /workspaces
