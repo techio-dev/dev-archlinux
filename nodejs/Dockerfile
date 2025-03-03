@@ -5,11 +5,11 @@ RUN pacman -S --noconfirm \
   npm \
   svelte-language-server \
   vscode-json-languageserver
-RUN bun install -g tailwindcss-language-server
 USER dev
 RUN yay -S --noconfirm \
   bun \
   prisma-language-server \
   vtsls
 USER root
+RUN bun install -g tailwindcss-language-server
 WORKDIR /workspaces
