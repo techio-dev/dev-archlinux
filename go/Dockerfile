@@ -4,7 +4,6 @@ RUN pacman -S --noconfirm \
   go \
   gopls \
   gofumpt \
-  go-task \
   sqlfluff \
   pgformatter \
   yaml-language-server \

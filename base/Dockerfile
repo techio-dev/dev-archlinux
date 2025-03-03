@@ -11,6 +11,7 @@ RUN pacman -S --noconfirm \
   unzip \
   curl \
   lazygit \
+  go-task \
   jq
 RUN useradd -m dev && echo "dev ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 USER dev
