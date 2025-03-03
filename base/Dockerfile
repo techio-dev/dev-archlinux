@@ -21,6 +21,5 @@ RUN cd /tmp/yay-build/yay && makepkg -si --noconfirm
 RUN rm -rf /tmp/yay-build
 RUN yay -S --noconfirm \
   mods
-RUN echo "root ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 USER root
 WORKDIR /workspaces
