@@ -9,4 +9,5 @@ RUN pacman -S --noconfirm \
   yaml-language-server \
   vscode-json-languageserver
 RUN go install golang.org/x/tools/cmd/goimports@latest
+RUN go install github.com/segmentio/golines@latest
 WORKDIR /workspaces
