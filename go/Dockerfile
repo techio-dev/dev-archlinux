@@ -1,4 +1,4 @@
-FROM ghcr.io/techio-dev/dev-archlinux:dev
+FROM ghcr.io/techio-dev/dev-archlinux:base
 RUN pacman -S --noconfirm \
   go \
   gopls \
