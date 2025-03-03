@@ -1,0 +1,6 @@
+{
+  "name": "Devcontainer ArchLinux NodeJS",
+  "build": {
+    "dockerfile": "Dockerfile"
+  }
+}
