@@ -20,9 +20,24 @@ jobs:
           registry: ghcr.io
           username: ${{github.actor}}
           password: ${{ secrets.GH_TOKEN }}
-      - name: Pre-build dev container image
+      - name: Pre-build dev container base image
         uses: devcontainers/ci@v0.3
         with:
           imageName: ghcr.io/techio-dev/dev-archlinux
           platform: linux/amd64,linux/arm64
           push: always
+          subFolder: base
+      - name: Pre-build dev container go image
+        uses: devcontainers/ci@v0.3
+        with:
+          imageName: ghcr.io/techio-dev/dev-archlinux:go
+          platform: linux/amd64,linux/arm64
+          push: always
+          subFolder: go
+      - name: Pre-build dev container nodejs image
+        uses: devcontainers/ci@v0.3
+        with:
+          imageName: ghcr.io/techio-dev/dev-archlinux:nodejs
+          platform: linux/amd64,linux/arm64
+          push: always
+          subFolder: nodejs

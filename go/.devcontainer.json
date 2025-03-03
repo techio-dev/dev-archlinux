@@ -1,0 +1,6 @@
+{
+  "name": "Devcontainer ArchLinux Go",
+  "build": {
+    "dockerfile": "Dockerfile"
+  }
+}
