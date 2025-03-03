@@ -12,8 +12,10 @@ RUN pacman -S --noconfirm \
   curl \
   lazygit \
   jq
-RUN git clone https://aur.archlinux.org/yay.git
-RUN cd yay
-RUN makepkg -si
+RUN useradd -m dev && echo "dev ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+USER dev
+RUN mkdir -p /tmp/yay-build
+RUN git clone https://aur.archlinux.org/yay.git /tmp/yay-build/yay
+RUN cd /tmp/yay-build/yay && makepkg -si --noconfirm
 RUN yay -S mods
 WORKDIR /workspaces
