@@ -1,5 +1,5 @@
 FROM ghcr.io/techio-dev/dev-archlinux:latest
-
+USER dev
 RUN pacman -S --noconfirm \
   nodejs-lts-jod \
   npm \

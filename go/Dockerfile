@@ -1,5 +1,5 @@
 FROM ghcr.io/techio-dev/dev-archlinux:latest
-
+USER dev
 RUN pacman -S --noconfirm \
   go \
   gopls \
@@ -8,7 +8,7 @@ RUN pacman -S --noconfirm \
   pgformatter \
   yaml-language-server \
   vscode-json-languageserver
-ENV PATH="$HOME/go/bin:$PATH"
+ENV PATH="/home/dev/go/bin:$PATH"
 RUN yay -S --noconfirm \
   golines
 RUN go install golang.org/x/tools/cmd/goimports@latest
