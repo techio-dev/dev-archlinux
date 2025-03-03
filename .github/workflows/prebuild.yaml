@@ -18,17 +18,22 @@ jobs:
         uses: devcontainers/ci@v0.3
         with:
           imageName: ghcr.io/techio-dev/dev-archlinux
+          imageTag: base
           push: always
           subFolder: base
       - name: Pre-build dev container go image
         uses: devcontainers/ci@v0.3
         with:
-          imageName: ghcr.io/techio-dev/dev-archlinux/go
+          imageName: ghcr.io/techio-dev/dev-archlinux
+          imageTag: go
           push: always
           subFolder: go
+          noCache: true
       - name: Pre-build dev container nodejs image
         uses: devcontainers/ci@v0.3
         with:
-          imageName: ghcr.io/techio-dev/dev-archlinux/nodejs
+          imageName: ghcr.io/techio-dev/dev-archlinux
+          imageTag: nodejs
           push: always
           subFolder: nodejs
+          noCache: true

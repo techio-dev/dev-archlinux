@@ -1,6 +1,4 @@
-FROM ghcr.io/techio-dev/dev-archlinux:latest
-RUN echo "dev ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
-USER dev
+FROM ghcr.io/techio-dev/dev-archlinux:base
 RUN pacman -S --noconfirm \
   nodejs-lts-jod \
   npm \
