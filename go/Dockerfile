@@ -10,6 +10,7 @@ RUN pacman -S --noconfirm \
   yaml-language-server \
   vscode-json-languageserver
 ENV PATH="$HOME/go/bin:$PATH"
-RUN yay -S golines
+RUN yay -S --noconfirm \
+  golines
 RUN go install golang.org/x/tools/cmd/goimports@latest
 WORKDIR /workspaces
