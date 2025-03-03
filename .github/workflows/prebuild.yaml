@@ -44,8 +44,8 @@ jobs:
         id: push-go-to-docker
         uses: redhat-actions/push-to-registry@v2
         with:
-          image: ${{ steps.build-base.outputs.image }}
-          tags: ${{ steps.build-base.outputs.tags }}
+          image: ${{ steps.build-go.outputs.image }}
+          tags: ${{ steps.build-go.outputs.tags }}
           registry: "ghcr.io/techio-dev"
           username: "naicoi92"
           password: ${{ secrets.GH_TOKEN }}
@@ -67,8 +67,8 @@ jobs:
         id: push-nodejs-to-docker
         uses: redhat-actions/push-to-registry@v2
         with:
-          image: ${{ steps.build-base.outputs.image }}
-          tags: ${{ steps.build-base.outputs.tags }}
+          image: ${{ steps.build-nodejs.outputs.image }}
+          tags: ${{ steps.build-nodejs.outputs.tags }}
           registry: "ghcr.io/techio-dev"
           username: "naicoi92"
           password: ${{ secrets.GH_TOKEN }}
