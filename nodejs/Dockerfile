@@ -5,8 +5,9 @@ RUN pacman -S --noconfirm \
   npm \
   svelte-language-server \
   vscode-json-languageserver
-RUN yay -S bun
-RUN yay -S prisma-language-server
-RUN yay -S vtsls
+RUN yay -S --noconfirm \
+  bun \
+  prisma-language-server \
+  vtsls
 RUN bun install -g tailwindcss-language-server
 WORKDIR /workspaces

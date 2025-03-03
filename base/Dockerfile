@@ -17,5 +17,7 @@ USER dev
 RUN mkdir -p /tmp/yay-build
 RUN git clone https://aur.archlinux.org/yay.git /tmp/yay-build/yay
 RUN cd /tmp/yay-build/yay && makepkg -si --noconfirm
-RUN yay -S mods
+RUN rm -rf /tmp/yay-build
+RUN yay -S --noconfirm \
+  mods
 WORKDIR /workspaces
