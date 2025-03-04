@@ -7,9 +7,10 @@ RUN pacman -S --noconfirm \
   vscode-json-languageserver
 USER dev
 RUN yay -S --noconfirm \
-  bun \
-  prisma-language-server \
-  vtsls
+  bun
 USER root
+ENV PATH="/root/.bun/bin:$PATH"
 RUN bun install -g tailwindcss-language-server
+RUN bun install -g @prisma/language-server
+RUN bun install -g @vtsls/language-server
 WORKDIR /workspaces
