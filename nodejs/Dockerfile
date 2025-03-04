@@ -5,10 +5,7 @@ RUN pacman -S --noconfirm \
   npm \
   svelte-language-server \
   vscode-json-languageserver
-USER dev
-RUN yay -S --noconfirm \
-  bun
-USER root
+RUN npm install -g bun
 ENV PATH="/root/.bun/bin:$PATH"
 RUN bun install -g tailwindcss-language-server
 RUN bun install -g @prisma/language-server
