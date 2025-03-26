@@ -7,10 +7,7 @@ RUN pacman -S --noconfirm \
   pgformatter \
   yaml-language-server \
   vscode-json-languageserver
-RUN go install golang.org/x/tools/cmd/goimports@latest
 ENV PATH="/root/go/bin:$PATH"
-USER dev
-RUN yay -S --noconfirm \
-  golines
-USER root
+RUN go install golang.org/x/tools/cmd/goimports@latest
+RUN go install github.com/segmentio/golines@latest
 WORKDIR /workspaces

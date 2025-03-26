@@ -26,49 +26,29 @@ jobs:
           registry: "ghcr.io/techio-dev"
           username: "naicoi92"
           password: ${{ secrets.GH_TOKEN }}
-  build-go:
+  build-containers:
     needs: [build-base]
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        container: ["go", "nodejs", "helm"]
     steps:
       - uses: actions/checkout@v4
-      - name: Buildah Go Images
-        id: build-go
+      - name: Buildah Container Images
+        id: build-container
         uses: redhat-actions/buildah-build@v2
         with:
           image: dev-archlinux
-          tags: go
+          tags: ${{ matrix.container }}
           oci: true
           containerfiles: |
-            go/Dockerfile
-      - name: Push Go To ghcr
-        id: push-go-to-docker
+            containers/${{ matrix.container }}/Dockerfile
+      - name: Push Container To ghcr
+        id: push-container-to-docker
         uses: redhat-actions/push-to-registry@v2
         with:
-          image: ${{ steps.build-go.outputs.image }}
-          tags: ${{ steps.build-go.outputs.tags }}
-          registry: "ghcr.io/techio-dev"
-          username: "naicoi92"
-          password: ${{ secrets.GH_TOKEN }}
-  build-nodejs:
-    needs: [build-base]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Buildah NodeJS Images
-        id: build-nodejs
-        uses: redhat-actions/buildah-build@v2
-        with:
-          image: dev-archlinux
-          tags: nodejs
-          oci: true
-          containerfiles: |
-            nodejs/Dockerfile
-      - name: Push Nodejs To ghcr
-        id: push-nodejs-to-docker
-        uses: redhat-actions/push-to-registry@v2
-        with:
-          image: ${{ steps.build-nodejs.outputs.image }}
-          tags: ${{ steps.build-nodejs.outputs.tags }}
+          image: ${{ steps.build-container.outputs.image }}
+          tags: ${{ steps.build-container.outputs.tags }}
           registry: "ghcr.io/techio-dev"
           username: "naicoi92"
           password: ${{ secrets.GH_TOKEN }}
